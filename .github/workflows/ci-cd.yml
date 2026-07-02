@@ -42,4 +42,4 @@ jobs:
       run: |
         docker push ${{ secrets.DOCKER_USERNAME }}/petclinic:${{ github.sha }}
 
-        navnath
+       
