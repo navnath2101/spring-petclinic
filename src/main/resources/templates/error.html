@@ -1,21 +1,49 @@
 <!DOCTYPE html>
-
-<html xmlns:th="https://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'error')}">
+<html xmlns:th="https://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout(~{::body}, 'error')}">
 
 <body>
-  <img src="../static/resources/images/pets.png" th:src="@{/resources/images/pets.png}" />
-  <!-- Title: Something happened -->
-  <h2 th:text="#{somethingHappened}">Something happened...</h2>
 
-  <!-- Status-specific error message -->
-  <p th:switch="${status}">
-    <span th:case="404" th:text="#{error.404}">The requested page was not found.</span>
-    <span th:case="500" th:text="#{error.500}">An internal server error occurred.</span>
-    <span th:case="*" th:text="#{error.general}">An unexpected error occurred.</span>
-  </p>
+<div class="container">
 
-  <!-- Exception message (for developers) -->
-  <p th:text="${message}">Exception message</p>
+    <img th:src="@{/resources/images/pets.png}"
+         alt="Pets"/>
+
+    <h2>Something happened...</h2>
+
+    <div th:switch="${status}">
+
+        <p th:case="404">
+            The requested page was not found.
+        </p>
+
+        <p th:case="500">
+            An internal server error occurred.
+        </p>
+
+        <p th:case="*">
+            An unexpected error occurred.
+        </p>
+
+    </div>
+
+    <div th:if="${message != null}">
+        <h4>Error Details</h4>
+        <p th:text="${message}"></p>
+    </div>
+
+    <div th:if="${timestamp != null}">
+        <p>
+            <strong>Time:</strong>
+            <span th:text="${timestamp}"></span>
+        </p>
+    </div>
+
+    <div>
+        <a th:href="@{/}">Back to Home</a>
+    </div>
+
+</div>
+
 </body>
-
 </html>
